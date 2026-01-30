@@ -2,7 +2,6 @@ package com.urlshortener.controller;
 
 import com.urlshortener.model.UrlRequest;
 import com.urlshortener.service.UrlShortenerService;
-
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
@@ -19,31 +18,31 @@ public class UrlController {
         this.service = service;
     }
 
+    // POST → shorten URL
     @PostMapping("/shorten")
     public String shorten(@RequestBody UrlRequest request) {
         return service.shortenUrl(request.getLongUrl());
     }
 
-    // TEMP TEST ENDPOINT (IMPORTANT)
+    // Health check
     @GetMapping("/ping")
     public String ping() {
         return "API is alive";
     }
 
+    // REDIRECT (THIS IS THE ONLY ONE YOU NEED)
     @GetMapping("/{code}")
     public void redirect(
-        @PathVariable String code,
-        HttpServletResponse response) throws IOException {
+            @PathVariable String code,
+            HttpServletResponse response) throws IOException {
 
-    String url = service.expandUrl(code);
+        String longUrl = service.expandUrl(code);
 
-    if (url == null || url.isBlank()) {
-        response.sendError(HttpServletResponse.SC_NOT_FOUND);
-        return;
+        if (longUrl == null || longUrl.isBlank()) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Short URL not found");
+            return;
+        }
+
+        response.sendRedirect(longUrl); // 302 redirect
     }
-
-    response.sendRedirect(url);
-    }
-
-
 }
