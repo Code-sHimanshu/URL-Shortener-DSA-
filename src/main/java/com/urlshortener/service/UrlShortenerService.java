@@ -3,6 +3,7 @@ package com.urlshortener.service;
 import com.urlshortener.model.UrlMapping;
 import com.urlshortener.repository.UrlRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
 
 @Service
 public class UrlShortenerService {
@@ -31,6 +32,7 @@ public class UrlShortenerService {
                 });
     }
 
+    @Cacheable(value = "shortUrls", key = "#code")
     public String expandUrl(String code) {
         return repo.findByShortCode(code)
                 .map(UrlMapping::getLongUrl)
