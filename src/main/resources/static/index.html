@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener API</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f7fa;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 12px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .endpoint {
+            margin: 12px 0;
+        }
+        footer {
+            margin-top: 24px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 URL Shortener API</h1>
+        <p>This is a backend service for shortening URLs.</p>
+
+        <div class="endpoint">
+            <strong>POST</strong> <code>/api/shorten</code>
+        </div>
+        <div class="endpoint">
+            <strong>GET</strong> <code>/{shortCode}</code>
+        </div>
+        <div class="endpoint">
+            <strong>GET</strong> <code>/api/ping</code>
+        </div>
+
+        <footer>
+            Built with Spring Boot · Redis · PostgreSQL
+        </footer>
+    </div>
+</body>
+</html>
